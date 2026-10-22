@@ -2,10 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://rule34.xxx/index.php?page=post&s=list&tags=wow%21_wow%21_wubbzy%21+">
-    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming soon!</title>
+    <style>
+        @font-face {
+            font-family: 'Valken';
+            src: url('font/Valken.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            pointer-events: none; /* Prevents right-click and interaction on the video itself */
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Valken', sans-serif;
+            font-size: 5rem;
+            color: #ffffff;
+            mix-blend-mode: difference;
+            user-select: none;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
 </head>
-<body>
-    <p>If you are not redirected automatically, follow this <a href="https://rule34.xxx/index.php?page=post&s=list&tags=wow%21_wow%21_wubbzy%21+">Link</a>.</p>
+<body oncontextmenu="return false;">
+    <div class="video-container">
+        <!-- 
+          - autoplay: starts playing automatically
+          - muted: required by modern browsers to allow autoplay with sound fallback
+          - loop: loops the video continuously with sound
+          - playsinline: ensures smooth playback on mobile devices
+          - oncontextmenu="return false": extra safeguard against right-clicking
+        -->
+        <video id="bg-video" autoplay muted loop playsinline oncontextmenu="return false;">
+            <source src="video/WC.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay-text">Coming soon!</div>
+    </div>
+
+    <script>
+        const video = document.getElementById('bg-video');
+
+        // Attempt to play with sound immediately on load
+        video.muted = false;
+        video.play().catch(() => {
+            // Fallback for browsers that block autoplay with sound: keep it muted and play
+            video.muted = true;
+            video.play();
+        });
+    </script>
 </body>
 </html>
